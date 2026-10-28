@@ -1,19 +1,19 @@
-# CareMate 🩺
+# CareMate
 
 **CareMate** is an Android health-assistant application designed to support elderly users and caregivers in managing daily healthcare routines. Developed as part of a University Thesis, CareMate simplifies tracking medications, medical appointments, and health examinations with an intuitive, accessible UI and an interactive bilingual voice command assistant.
 
 ---
 
-## 🌟 Key Features
+## Key Features
 
-* **💊 Medication Tracking**: Easily record, manage, and view prescribed medications, including dosages, scheduled administration times, and personalized notes.
-* **📅 Appointment Scheduling**: Keep track of doctor visits, specialist appointments, locations, and doctor details.
-* **🔬 Medical Examination Reminders**: Log upcoming blood tests, imaging, and routine health check-ups.
-* **🎙️ Interactive Voice Assistant**: Built-in bilingual (**Greek** & **English**) voice interface that uses Speech-to-Text and Text-to-Speech to guide users step-by-step through adding, editing, or removing entries hands-free.
-* **⏰ Scheduled Exact Alarms & Notifications**: Integrated with Android `AlarmManager` and `NotificationManagerCompat` to deliver timely exact reminders prior to scheduled medication and appointment times.
-* **🌍 Bilingual Support (EN / EL)**: Native support for both **English** and **Greek** locales, dynamically adapting UI text and voice prompts.
-* **⚙️ Voice Speed & Accessibility Settings**: Adjustable Text-to-Speech playback speed and permission management for seamless accessibility.
-* **🔥 Cloud Synchronization**: Real-time cloud persistence backed by **Firebase Firestore** and anonymous authentication via **Firebase Auth**.
+* **Medication Tracking**: Easily record, manage, and view prescribed medications, including dosages, scheduled administration times, and personalized notes.
+* **Appointment Scheduling**: Keep track of doctor visits, specialist appointments, locations, and doctor details.
+* **Medical Examination Reminders**: Log upcoming blood tests, imaging, and routine health check-ups.
+* **Interactive Voice Assistant**: Built-in bilingual (**Greek** & **English**) voice interface that uses Speech-to-Text and Text-to-Speech to guide users step-by-step through adding, editing, or removing entries hands-free.
+* **Scheduled Exact Alarms & Notifications**: Integrated with Android `AlarmManager` and `NotificationManagerCompat` to deliver timely exact reminders prior to scheduled medication and appointment times.
+* **Bilingual Support (EN / EL)**: Native support for both **English** and **Greek** locales, dynamically adapting UI text and voice prompts.
+* **Voice Speed & Accessibility Settings**: Adjustable Text-to-Speech playback speed and permission management for seamless accessibility.
+* **Cloud Synchronization**: Real-time cloud persistence backed by **Firebase Firestore** and anonymous authentication via **Firebase Auth**.
 
 ---
 
@@ -52,7 +52,7 @@ CareMate/
 
 ---
 
-## 🚀 Getting Started
+##  Getting Started
 
 ### Prerequisites
 
@@ -64,7 +64,7 @@ CareMate/
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/YOUR_GITHUB_USERNAME/CareMate.git
+   git clone https://github.com/ArfanisP/CareMate.git
    cd CareMate
    ```
 
@@ -78,10 +78,7 @@ CareMate/
 
 ---
 
-## 🛡️ License
+## ️ License
 
-This project was developed for educational and academic research purposes as part of a University Thesis.
+This project was developed for educational and academic research purposes as part of a Thesis at the University of Piraeus.
 
----
-
-**Developed with care for accessible digital healthcare.**
