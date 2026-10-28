@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="caremate_primary">#0F6F72</color>
+    <color name="caremate_on_primary">#FFFFFFFF</color>
+    <color name="caremate_primary_container">#D6F3F1</color>
+    <color name="caremate_on_primary_container">#073638</color>
+    <color name="caremate_secondary">#765A00</color>
+    <color name="caremate_secondary_container">#FFF0BF</color>
+    <color name="caremate_tertiary">#8A4055</color>
+    <color name="caremate_tertiary_container">#FFD9E2</color>
+    <color name="caremate_background">#F7FAF9</color>
+    <color name="caremate_surface">#FFFFFFFF</color>
+    <color name="caremate_surface_variant">#E7EFED</color>
+    <color name="caremate_on_surface">#18201F</color>
+    <color name="caremate_on_surface_variant">#4A5654</color>
+    <color name="caremate_outline">#BAC8C5</color>
+    <color name="caremate_success">#3F6B34</color>
+</resources>

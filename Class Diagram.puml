@@ -1,0 +1,467 @@
+@startuml
+class com.caremate.app.ExampleUnitTest {
++ void addition_isCorrect()
+}
+
+class com.caremate.app.repository.AuthRepository {
+- FirebaseAuth firebaseAuth
++ FirebaseUser getCurrentUser()
++ Task<AuthResult> signInAnonymouslyIfNeeded()
+}
+
+
+class com.caremate.app.util.DateTimePickerHelper {
++ {static} void attachDatePicker(Context,TextInputEditText)
++ {static} void attachTimePicker(Context,TextInputEditText)
+- {static} void showDatePicker(Context,TextInputEditText)
+- {static} void showTimePicker(Context,TextInputEditText)
+}
+
+class com.caremate.app.model.Medication {
+- String id
+- String name
+- String dosage
+- String time
+- String notes
++ String getId()
++ void setId(String)
++ String getName()
++ void setName(String)
++ String getDosage()
++ void setDosage(String)
++ String getTime()
++ void setTime(String)
++ String getNotes()
++ void setNotes(String)
+}
+
+
+class com.caremate.app.repository.ExaminationRepository {
+- FirebaseAuth firebaseAuth
+- FirebaseFirestore firestore
++ void loadExaminations(ExaminationLoadCallback)
++ Task<Void> saveExamination(Examination)
++ Task<Void> deleteExamination(String)
+- CollectionReference getExaminationCollection()
+- Examination mapExamination(DocumentSnapshot)
+}
+
+
+interface com.caremate.app.repository.ExaminationRepository$ExaminationLoadCallback {
+~ void onExaminationsLoaded(List<Examination>)
+~ void onError(String)
+}
+
+class com.caremate.app.ui.main.MainActivity {
+- {static} int VOICE_REQUEST_CODE
+- {static} int RECORD_AUDIO_PERMISSION_REQUEST_CODE
+- {static} int NOTIFICATION_PERMISSION_REQUEST_CODE
+- {static} int EVENT_REMINDER_MINUTES_BEFORE
+- {static} String PREFS_NAME
+- {static} String KEY_TTS_RATE
+- {static} float DEFAULT_TTS_RATE
+- AuthRepository authRepository
+- MedicationRepository medicationRepository
+- AppointmentRepository appointmentRepository
+- ExaminationRepository examinationRepository
+- ReminderScheduler reminderScheduler
+- TextToSpeech textToSpeech
+- boolean textToSpeechReady
+- VoiceAction pendingVoiceAction
+- VoiceTarget pendingVoiceTarget
+- VoiceStep pendingVoiceStep
+- String voiceTitle
+- String voiceDosage
+- String voiceDate
+- String voiceTime
+- String pendingDeleteId
+- String pendingEditId
+- Intent pendingRecognitionIntent
+- String pendingRecognitionUtteranceId
+# void onCreate(Bundle)
+- void setupHomeActions()
+- void signInAnonymously()
+- void setupTextToSpeech()
+# void onResume()
+- boolean applyTextToSpeechSettings()
+- Locale getUiSpeechLocale()
+- float getSavedTtsRate()
+- void requestNotificationPermissionIfNeeded()
+- void startVoiceCommand()
+- void listenForVoice(String)
+- void speakThenListen(String,Intent)
+- void startRecognitionAfterPrompt(String)
+- void startPendingSpeechRecognition()
+# void onActivityResult(int,int,Intent)
+- void handleInitialVoiceCommand(String)
+- void startEditFlow(VoiceTarget)
+- void startAddFlow(VoiceTarget)
+- void startDeleteFlow(VoiceTarget)
+- void handleVoiceAnswer(String)
+- void saveMedicationByVoice()
+- void saveAppointmentByVoice()
+- void saveExaminationByVoice()
+- void editByVoice(String)
+- void editMedicationByVoice(String)
+- void editAppointmentByVoice(String)
+- void editExaminationByVoice(String)
+- void deleteByVoice(String)
+- void deleteMedicationByVoice(String)
+- void deleteAppointmentByVoice(String)
+- void deleteExaminationByVoice(String)
+- void askDeleteConfirmation(String,String)
+- void handleDeleteConfirmation(String)
+- void deleteConfirmedMedication()
+- void deleteConfirmedAppointment()
+- void deleteConfirmedExamination()
+- Medication findMedicationByName(List<Medication>,String)
+- Appointment findAppointmentByTitle(List<Appointment>,String)
+- Examination findExaminationByTitle(List<Examination>,String)
+- VoiceAction detectVoiceAction(String)
+- VoiceTarget detectVoiceTarget(String)
+- boolean isPositiveAnswer(String)
+- boolean isNegativeAnswer(String)
+- String normalizeSpokenTime(String)
+- String normalizeSpokenDate(String)
+- String replaceMonthNames(String)
+- boolean startsWithMonthName(String)
+- String replaceSpokenNumberWords(String)
+- List<String> extractNumbers(String)
+- String normalizeYear(String)
+- String formatDate(Calendar)
+- String twoDigitNumber(String)
+- String cleanVoiceText(String)
+- String normalizeForMatching(String)
+- void openSection(Class<?>,int)
+- void showVoiceNotUnderstood()
+- void showVoiceInvalidFields()
+- void showVoiceItemNotFound()
+- void showVoiceOperationFailed()
+- void showVoiceSuccess(int)
+- void showAuthNotReady()
+- void speak(String)
+- void resetVoiceFlow()
++ void onRequestPermissionsResult(int,String[],int[])
+# void onDestroy()
+}
+
+
+enum com.caremate.app.ui.main.VoiceAction {
++  NONE
++  ADD
++  DELETE
++  EDIT
+}
+
+enum com.caremate.app.ui.main.VoiceTarget {
++  NONE
++  MEDICATION
++  APPOINTMENT
++  EXAMINATION
+}
+
+enum com.caremate.app.ui.main.VoiceStep {
++  IDLE
++  MEDICATION_NAME
++  MEDICATION_DOSAGE
++  MEDICATION_TIME
++  APPOINTMENT_TITLE
++  APPOINTMENT_DATE
++  APPOINTMENT_TIME
++  EXAMINATION_TITLE
++  EXAMINATION_DATE
++  EXAMINATION_TIME
++  EDIT_NAME
++  DELETE_NAME
++  CONFIRM_DELETE
+}
+
+class com.caremate.app.notification.BootReminderReceiver {
+- {static} String MEDICATION_CATEGORY
+- {static} String APPOINTMENT_CATEGORY
+- {static} String EXAMINATION_CATEGORY
+- {static} int EVENT_REMINDER_MINUTES_BEFORE
++ void onReceive(Context,Intent)
+- void finishOneLoad(int[],PendingResult)
+}
+
+
+class com.caremate.app.repository.MedicationRepository {
+- FirebaseAuth firebaseAuth
+- FirebaseFirestore firestore
++ void loadMedications(MedicationLoadCallback)
++ Task<Void> saveMedication(Medication)
++ Task<Void> deleteMedication(String)
+- CollectionReference getMedicationCollection()
+- Medication mapMedication(DocumentSnapshot)
+}
+
+
+interface com.caremate.app.repository.MedicationRepository$MedicationLoadCallback {
+~ void onMedicationsLoaded(List<Medication>)
+~ void onError(String)
+}
+
+class com.caremate.app.viewmodel.ExaminationViewModel {
+- ExaminationRepository examinationRepository
++ void loadExaminations(ExaminationRepository.ExaminationLoadCallback)
++ Task<Void> saveExamination(Examination)
++ Task<Void> deleteExamination(String)
+}
+
+
+class com.caremate.app.viewmodel.MedicationViewModel {
+- MedicationRepository medicationRepository
++ void loadMedications(MedicationRepository.MedicationLoadCallback)
++ Task<Void> saveMedication(Medication)
++ Task<Void> deleteMedication(String)
+}
+
+
+class com.caremate.app.viewmodel.AppointmentViewModel {
+- AppointmentRepository appointmentRepository
++ void loadAppointments(AppointmentRepository.AppointmentLoadCallback)
++ Task<Void> saveAppointment(Appointment)
++ Task<Void> deleteAppointment(String)
+}
+
+
+class com.caremate.app.util.ReminderDateTimeParser {
+- {static} String[] DATE_PATTERNS
++ {static} long nextDailyTimeMillis(String)
++ {static} long dateTimeMillis(String,String)
++ {static} long dateTimeMillisBefore(String,String,int)
+- {static} Calendar parseDate(String)
+- {static} Calendar parseTime(String)
+}
+
+
+class com.caremate.app.notification.ReminderScheduler {
++ {static} String CHANNEL_ID
++ {static} String EXTRA_TITLE
++ {static} String EXTRA_MESSAGE
++ {static} String EXTRA_NOTIFICATION_ID
++ {static} String EXTRA_CATEGORY
++ {static} String EXTRA_REMINDER_ID
++ {static} String EXTRA_REPEAT_DAILY
++ {static} String EXTRA_TRIGGER_AT
++ {static} long DAY_INTERVAL_MILLIS
+- Context context
+- AlarmManager alarmManager
++ {static} void createNotificationChannel(Context)
++ boolean canPostNotifications()
++ boolean scheduleDaily(String,String,long,String,String)
++ boolean scheduleOnce(String,String,long,String,String)
++ void cancel(String,String)
+- void scheduleAlarm(long,PendingIntent)
+- PendingIntent createPendingIntent(String,String,String,String,boolean,long)
+}
+
+
+class com.caremate.app.ExampleInstrumentedTest {
++ void useAppContext()
+}
+
+class com.caremate.app.model.Examination {
+- String id
+- String title
+- String date
+- String time
+- String notes
++ String getId()
++ void setId(String)
++ String getTitle()
++ void setTitle(String)
++ String getDate()
++ void setDate(String)
++ String getTime()
++ void setTime(String)
++ String getNotes()
++ void setNotes(String)
+}
+
+
+class com.caremate.app.ui.examination.ExaminationActivity {
+- {static} String REMINDER_CATEGORY
+- {static} int REMINDER_MINUTES_BEFORE
+- ExaminationViewModel examinationViewModel
+- ReminderScheduler reminderScheduler
+- TextInputEditText examinationTitleEditText
+- TextInputEditText examinationDateEditText
+- TextInputEditText examinationTimeEditText
+- TextInputEditText examinationNotesEditText
+- TextView formTitleTextView
+- TextView emptyExaminationsTextView
+- LinearLayout examinationsListContainer
+- MaterialButton saveExaminationButton
+- MaterialButton cancelEditButton
+- Examination selectedExamination
+# void onCreate(Bundle)
+- void bindViews()
+- void setupInsets()
+- void setupPickers()
+- void setupActions()
+- void loadExaminations()
+- void renderExaminations(List<Examination>)
+- void bindExaminationView(View,Examination)
+- void saveExamination()
+- void showExaminationForEditing(Examination)
+- void confirmExaminationDelete(Examination)
+- void deleteExamination(Examination)
+- void scheduleExaminationReminder(Examination)
+- void clearForm()
+- String getTextValue(TextInputEditText)
+}
+
+
+class com.caremate.app.repository.AppointmentRepository {
+- FirebaseAuth firebaseAuth
+- FirebaseFirestore firestore
++ void loadAppointments(AppointmentLoadCallback)
++ Task<Void> saveAppointment(Appointment)
++ Task<Void> deleteAppointment(String)
+- CollectionReference getAppointmentCollection()
+- Appointment mapAppointment(DocumentSnapshot)
+}
+
+
+interface com.caremate.app.repository.AppointmentRepository$AppointmentLoadCallback {
+~ void onAppointmentsLoaded(List<Appointment>)
+~ void onError(String)
+}
+
+class com.caremate.app.ui.appointment.AppointmentActivity {
+- {static} String REMINDER_CATEGORY
+- {static} int REMINDER_MINUTES_BEFORE
+- AppointmentViewModel appointmentViewModel
+- ReminderScheduler reminderScheduler
+- TextInputEditText appointmentTitleEditText
+- TextInputEditText appointmentDateEditText
+- TextInputEditText appointmentTimeEditText
+- TextInputEditText appointmentNotesEditText
+- TextView formTitleTextView
+- TextView emptyAppointmentsTextView
+- LinearLayout appointmentsListContainer
+- MaterialButton saveAppointmentButton
+- MaterialButton cancelEditButton
+- Appointment selectedAppointment
+# void onCreate(Bundle)
+- void bindViews()
+- void setupInsets()
+- void setupPickers()
+- void setupActions()
+- void loadAppointments()
+- void renderAppointments(List<Appointment>)
+- void bindAppointmentView(View,Appointment)
+- void saveAppointment()
+- void showAppointmentForEditing(Appointment)
+- void confirmAppointmentDelete(Appointment)
+- void deleteAppointment(Appointment)
+- void scheduleAppointmentReminder(Appointment)
+- void clearForm()
+- String getTextValue(TextInputEditText)
+}
+
+
+class com.caremate.app.model.Appointment {
+- String id
+- String title
+- String date
+- String time
+- String notes
++ String getId()
++ void setId(String)
++ String getTitle()
++ void setTitle(String)
++ String getDate()
++ void setDate(String)
++ String getTime()
++ void setTime(String)
++ String getNotes()
++ void setNotes(String)
+}
+
+
+class com.caremate.app.ui.settings.SettingsActivity {
+- {static} int MICROPHONE_PERMISSION_REQUEST_CODE
+- {static} int NOTIFICATION_PERMISSION_REQUEST_CODE
+- {static} String PREFS_NAME
+- {static} String KEY_TTS_RATE
+- {static} float DEFAULT_TTS_RATE
+- TextView microphoneStatusTextView
+- TextView notificationStatusTextView
+- TextView exactAlarmStatusTextView
+- TextView ttsSpeedValueTextView
+- MaterialButton microphonePermissionButton
+- MaterialButton notificationPermissionButton
+- MaterialButton exactAlarmPermissionButton
+- Slider ttsSpeedSlider
+- SharedPreferences preferences
+# void onCreate(Bundle)
+# void onResume()
+- void bindViews()
+- void setupInsets()
+- void setupActions()
+- void setupTtsSpeed()
+- void updateTtsSpeedLabel(float)
+- void updatePermissionStatus()
+- boolean notificationsEnabled()
+- boolean exactAlarmsAllowed()
+- void requestMicrophonePermission()
+- void requestNotificationPermission()
+- void openAppSettings()
+- void openExactAlarmSettings()
++ void onRequestPermissionsResult(int,String[],int[])
+}
+
+
+class com.caremate.app.ui.medication.MedicationActivity {
+- {static} String REMINDER_CATEGORY
+- MedicationViewModel medicationViewModel
+- ReminderScheduler reminderScheduler
+- TextInputEditText medicationNameEditText
+- TextInputEditText medicationDosageEditText
+- TextInputEditText medicationTimeEditText
+- TextInputEditText medicationNotesEditText
+- TextView formTitleTextView
+- TextView emptyMedicationsTextView
+- LinearLayout medicationsListContainer
+- MaterialButton saveMedicationButton
+- MaterialButton cancelEditButton
+- Medication selectedMedication
+# void onCreate(Bundle)
+- void bindViews()
+- void setupInsets()
+- void setupPickers()
+- void setupActions()
+- void loadMedications()
+- void renderMedications(List<Medication>)
+- void bindMedicationView(View,Medication)
+- void saveMedication()
+- void showMedicationForEditing(Medication)
+- void confirmMedicationDelete(Medication)
+- void deleteMedication(Medication)
+- void scheduleMedicationReminder(Medication)
+- void clearForm()
+- String getTextValue(TextInputEditText)
+}
+
+
+class com.caremate.app.notification.ReminderReceiver {
++ void onReceive(Context,Intent)
+- void rescheduleDailyReminder(Context,Intent,String,String)
+}
+
+
+
+com.caremate.app.repository.ExaminationRepository +.. com.caremate.app.repository.ExaminationRepository$ExaminationLoadCallback
+androidx.appcompat.app.AppCompatActivity <|-- com.caremate.app.ui.main.MainActivity
+android.content.BroadcastReceiver <|-- com.caremate.app.notification.BootReminderReceiver
+com.caremate.app.repository.MedicationRepository +.. com.caremate.app.repository.MedicationRepository$MedicationLoadCallback
+androidx.appcompat.app.AppCompatActivity <|-- com.caremate.app.ui.examination.ExaminationActivity
+com.caremate.app.repository.AppointmentRepository +.. com.caremate.app.repository.AppointmentRepository$AppointmentLoadCallback
+androidx.appcompat.app.AppCompatActivity <|-- com.caremate.app.ui.appointment.AppointmentActivity
+androidx.appcompat.app.AppCompatActivity <|-- com.caremate.app.ui.settings.SettingsActivity
+androidx.appcompat.app.AppCompatActivity <|-- com.caremate.app.ui.medication.MedicationActivity
+android.content.BroadcastReceiver <|-- com.caremate.app.notification.ReminderReceiver
+@enduml

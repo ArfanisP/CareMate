@@ -1,0 +1,50 @@
+# Built application files
+*.apk
+*.aar
+*.ap_
+*.aab
+
+# Files for ART/DALVIK VM & Java Class files
+*.dex
+*.class
+
+# Generated build output
+build/
+app/build/
+/bin/
+/gen/
+/out/
+.gradle/
+.gradle-user-home/
+
+# Local developer settings & SDK configuration
+local.properties
+
+# Log Files
+*.log
+
+# Android Studio & IntelliJ IDEA project files
+*.iml
+.idea/
+!.idea/copyright/
+!.idea/codeStyles/
+!.idea/inspectionProfiles/
+
+# macOS / OS X system files
+.DS_Store
+*.icns
+.AppleDouble
+.LSOverride
+._*
+
+# Signing / Keystore files
+*.jks
+*.keystore
+
+# Native build directories
+.externalNativeBuild
+.cxx
+
+# Backup and temp files
+*.bak
+*~

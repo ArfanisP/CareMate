@@ -1,0 +1,24 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Base.Theme.CareMate" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:fontFamily">sans</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:statusBarColor">@color/caremate_background</item>
+        <item name="android:navigationBarColor">@color/caremate_background</item>
+        <item name="colorPrimary">@color/caremate_primary</item>
+        <item name="colorOnPrimary">@color/caremate_on_primary</item>
+        <item name="colorPrimaryContainer">@color/caremate_primary_container</item>
+        <item name="colorOnPrimaryContainer">@color/caremate_on_primary_container</item>
+        <item name="colorSecondary">@color/caremate_secondary</item>
+        <item name="colorSecondaryContainer">@color/caremate_secondary_container</item>
+        <item name="colorTertiary">@color/caremate_tertiary</item>
+        <item name="colorTertiaryContainer">@color/caremate_tertiary_container</item>
+        <item name="colorSurface">@color/caremate_surface</item>
+        <item name="colorSurfaceVariant">@color/caremate_surface_variant</item>
+        <item name="colorOnSurface">@color/caremate_on_surface</item>
+        <item name="colorOnSurfaceVariant">@color/caremate_on_surface_variant</item>
+        <item name="colorOutline">@color/caremate_outline</item>
+        <item name="android:colorAccent">@color/caremate_primary</item>
+    </style>
+
+    <style name="Theme.CareMate" parent="Base.Theme.CareMate" />
+</resources>
